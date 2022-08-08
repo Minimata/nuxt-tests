@@ -1,0 +1,8 @@
+query articles {
+  _helloworld_article {
+    title
+    author {
+      name
+    }
+  }
+}
