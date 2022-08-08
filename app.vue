@@ -1,17 +1,30 @@
-<script setup>
+<script setup lang="ts">
 import { createClient, provideClient } from "@urql/vue";
+import { NhostClient, useAccessToken } from '@nhost/vue'
+
+const config = useRuntimeConfig()
+const nhost = new NhostClient({
+  subdomain: config.nhostSubdomain,
+  region: config.nhostRegion
+})
+
+await nhost.auth.signIn({
+  email: 'minimata94@gmail.com',
+  password: '12340987'
+})
 
 const client = createClient({
-  url: "https://tkwleelnoiqszqxnesgw.nhost.run/v1/graphql",
+  url: nhost.graphql.getUrl(),
   fetchOptions: () => {
-    const token = getToken();
+    const token = nhost.auth.getAccessToken()
     return {
-      headers: { authorization: token ? `Bearer ${token}` : "" },
+      headers: { authorization: token ? `Bearer ${token}` : '' },
     };
   },
 });
 
 provideClient(client);
+
 </script>
 
 <template>

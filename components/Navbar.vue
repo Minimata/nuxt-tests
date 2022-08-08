@@ -33,16 +33,14 @@ const buttons = [
   <div class="fixed top-0 left-0 h-screen w-16 flex flex-col shadow-lg">
     <div>
       <ul>
-        <div v-for="button in buttons" :key="button.name">
-          <li>
-            <NuxtLink :to="button.to">
-              <NavbarIcon
-                :name="button.name"
-                :icon="button.icon"
-                :divider="button.divider"
-              />
-            </NuxtLink>
-          </li>
+        <div>
+          <div v-for="button in buttons" :key="button.name">
+            <li>
+              <NuxtLink :to="button.to">
+                <NavbarIcon :name="button.name" :icon="button.icon" :divider="button.divider" />
+              </NuxtLink>
+            </li>
+          </div>
         </div>
       </ul>
     </div>
