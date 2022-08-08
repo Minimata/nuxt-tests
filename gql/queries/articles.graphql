@@ -1,8 +1,9 @@
-query articles {
+query GetArticles {
   _helloworld_article {
-    title
     author {
       name
     }
+    title
+    id
   }
 }

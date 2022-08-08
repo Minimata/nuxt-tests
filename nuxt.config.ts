@@ -19,6 +19,7 @@ export default defineNuxtConfig({
         },
       },
     },
+    transpile: ["@urql/vue"],
   },
   css: ["~/assets/css/tailwind.css"],
 
@@ -33,13 +34,13 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // Private config 
+    // Private config
     // nhostSubdomain: 'tkwleelnoiqszqxnesgw',
     // nhostRegion: 'eu-central-1',
     // Config within public will be also exposed to the client
     public: {
-      nhostSubdomain: 'tkwleelnoiqszqxnesgw',
-      nhostRegion: 'eu-central-1',
-    }
+      nhostSubdomain: "tkwleelnoiqszqxnesgw",
+      nhostRegion: "eu-central-1",
+    },
   },
 });
