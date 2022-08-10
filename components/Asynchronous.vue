@@ -1,27 +1,45 @@
 <script setup lang="ts">
 import { useQuery, gql } from "@urql/vue";
+import { reactive } from "vue";
 
+const { time } = defineProps({
+  time: {
+    type: Number,
+    required: true,
+  },
+});
+
+// Add in a delay to simulate loading data
+await new Promise((resolve: any) => {
+  setTimeout(() => {
+    resolve();
+  }, time);
+});
+
+const from = ref(0);
 const GetArticles = gql`
-  query GetArticles {
-    _helloworld_article {
-      author {
-        name
-      }
+  query ($offset: Int!, $limit: Int!) {
+    _helloworld_article(offset: $offset, limit: $limit) {
       title
       id
     }
   }
 `;
 
-const delay = (n: number) => {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, n * 1000);
-  });
-};
-
 const { data, fetching, error } = await useQuery({
   query: GetArticles,
+  variables: { offset: from, limit: 2 },
 });
+
+const articles = data.value._helloworld_article;
+
+if (error.value) {
+  console.log(error);
+}
+
+const onClick = () => {
+  from.value += 1;
+};
 
 // watch([data, fetching, error], () => {
 //   if (data.value) {
@@ -31,17 +49,17 @@ const { data, fetching, error } = await useQuery({
 //     });
 //   }
 // });
-
-const articles = data.value._helloworld_article;
 </script>
 
 <template>
   <div>
     <ul>
-      <div>
-        <div v-for="article in articles" :key="article.id">
-          <li>{{ article.title }} {{ article.author.name }}</li>
+      <div v-if="data">
+        <div v-for="article in data._helloworld_article" :key="article.id">
+          <li>{{ article.title }}</li>
         </div>
+
+        <button @click="onClick">Next Page</button>
       </div>
     </ul>
   </div>

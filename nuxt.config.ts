@@ -43,4 +43,8 @@ export default defineNuxtConfig({
       nhostRegion: "eu-central-1",
     },
   },
+  experimental: {
+    asyncEntry: true,
+    reactivityTransform: true,
+  },
 });
