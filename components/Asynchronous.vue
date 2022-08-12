@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useQuery, gql } from "@urql/vue";
-import { reactive } from "vue";
 
 const { time } = defineProps({
   time: {
@@ -31,8 +30,6 @@ const { data, fetching, error } = await useQuery({
   variables: { offset: from, limit: 2 },
 });
 
-const articles = data.value._helloworld_article;
-
 if (error.value) {
   console.log(error);
 }
@@ -54,7 +51,7 @@ const onClick = () => {
 <template>
   <div>
     <ul>
-      <div v-if="data">
+      <div>
         <div v-for="article in data._helloworld_article" :key="article.id">
           <li>{{ article.title }}</li>
         </div>

@@ -1,14 +1,13 @@
 <template>
   <div>
-    <button @click="reload">Reload page</button>
-    <BasicInput title="Welcome">
-      <Suspense>
+    <Suspense>
+      <BasicInput title="Welcome">
         <Asynchronous :time="0"> </Asynchronous>
-        <template #fallback>
-          <span>Loading...</span>
-        </template>
-      </Suspense>
-    </BasicInput>
+      </BasicInput>
+      <template #fallback>
+        <span>Loading...</span>
+      </template>
+    </Suspense>
   </div>
 </template>
 
