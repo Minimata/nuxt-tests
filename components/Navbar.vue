@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { LightningBoltIcon, ScaleIcon, HomeIcon } from "@heroicons/vue/outline";
-import { SunIcon, MoonIcon } from "@heroicons/vue/solid";
+import {
+  LightningBoltIcon,
+  ScaleIcon,
+  HomeIcon,
+} from "@heroicons/vue/outline/index.js";
 
 type Theme = "light" | "dark";
 
@@ -37,7 +40,11 @@ const buttons = [
           <div v-for="button in buttons" :key="button.name">
             <li>
               <NuxtLink :to="button.to">
-                <NavbarIcon :name="button.name" :icon="button.icon" :divider="button.divider" />
+                <NavbarIcon
+                  :name="button.name"
+                  :icon="button.icon"
+                  :divider="button.divider"
+                />
               </NuxtLink>
             </li>
           </div>
